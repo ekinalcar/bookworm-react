@@ -24,10 +24,11 @@ class LoginForm extends PureComponent {
 
   onSubmit = () =>{
     const {data} = this.state;
+    const {submit} = this.props;
     const errors = this.validate(data);
     this.setState({errors});
     if(Object.keys(errors).length === 0){
-      this.props.submit(data);
+      submit(data);
     }
   }
 
@@ -43,7 +44,7 @@ class LoginForm extends PureComponent {
     return (
       <Form onSubmit={this.onSubmit}>
         <Form.Field error={!!errors.email}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email
           <input
             type="email"
             id="email"
@@ -51,11 +52,11 @@ class LoginForm extends PureComponent {
             placeholder="example@example.com"
             value={data.email}
             onChange = {this.onChange}
-          />
+          /></label>
           {errors.email && <InlineError text = {errors.email} />}
         </Form.Field>
         <Form.Field error={!!errors.password}>
-          <label htmlFor="password">Passoword</label>
+          <label htmlFor="password">Passoword
           <input
             type="password"
             id="password"
@@ -64,6 +65,7 @@ class LoginForm extends PureComponent {
             value={data.password}
             onChange = {this.onChange}
           />
+          </label>
           {errors.password && <InlineError text = {errors.password} />}
         </Form.Field>
         <Button primary>Login</Button>
